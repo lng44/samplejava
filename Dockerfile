@@ -5,19 +5,17 @@ RUN powershell -NoProfile -Command " \
     Invoke-WebRequest -Uri https://download.java.net/openjdk/jdk17/ri/openjdk-17+35_windows-x64_bin.zip -OutFile C:\openjdk.zip; \
     Expand-Archive -Path C:\openjdk.zip -DestinationPath C:\openjdk; \
     Remove-Item -Path C:\openjdk.zip \
+    [System.Environment]::SetEnvironmentVariable('JAVA_HOME', 'C:\openjdk', [System.EnvironmentVariableTarget]::Machine); \
+    [System.Environment]::SetEnvironmentVariable('Path', 'C:\openjdk\bin;' + [System.Environment]::GetEnvironmentVariable('Path', [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Machine) \
     "
-
-
-ENV JAVA_HOME C:\openjdk
-ENV PATH="%JAVA_HOME%\bin;%PATH%"
 
 RUN powershell -NoProfile -Command " \
     Invoke-WebRequest -Uri https://downloads.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.zip -OutFile C:\maven.zip; \
     Expand-Archive -Path C:\maven.zip -DestinationPath C:\; \
     Rename-Item -Path C:\apache-maven-* C:\maven; \
     Remove-Item -Path C:\maven.zip \
+    [System.Environment]::SetEnvironmentVariable('Path', 'C:\maven\bin;' + [System.Environment]::GetEnvironmentVariable('Path', [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Machine) \
     "
-ENV PATH="C:\maven\bin;%PATH%"
 
 RUN powershell -NoProfile -Command " \
     Invoke-WebRequest -Uri https://downloads.apache.org/tomcat/tomcat-6/v6.0.53/bin/apache-tomcat-6.0.53.zip -OutFile C:\tomcat.zip; \
