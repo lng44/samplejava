@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
 COPY . c:\\app
-RUN ["pwsh", "-File", "c:\init.ps1"]
+RUN ["powershell", "-File", "c:\init.ps1"]
 
 WORKDIR c:\\app
 RUN mvn clean package
