@@ -41,11 +41,11 @@ jobs:
       # Wait for a few seconds to ensure the container is up
       - name: Wait for container to be ready
         run: |
-          Start-Sleep -Seconds 10
+          Start-Sleep -Seconds 50
 
       - name: List Docker Container
         run: |
-          docker container ls
+          docker ps -a
 
       # Print content from the application using curl
       - name: Curl application content
