@@ -1,11 +1,9 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
 RUN MKDIR c:\app
-COPY . c:\app
 WORKDIR c:\app
-
+COPY . .
 RUN . .\init.ps1
-
 RUN mvn clean package
 RUN copy c:\app\target\*.war C:\tomcat\webapps\ROOT.war
 EXPOSE 8080
