@@ -5,8 +5,9 @@ WORKDIR c:\\app
 COPY . .
 RUN powershell -File "init.ps1"
 RUN mvn clean package
-RUN copy c:\\app\\target\\*.war C:\\tomcat\\webapps\\ROOT.war
-RUN powershell -File "debug.ps1"
 EXPOSE 8080
+RUN rm -rf c:/tomcat/webapps/ROOT
+COPY ./target/*.war c:/tomcat/webapps/ROOT.war
+RUN powershell -File "debug.ps1"
 CMD ["catalina.bat","run"]
 
