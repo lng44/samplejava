@@ -8,12 +8,5 @@ RUN mvn clean package
 RUN copy c:\\app\\target\\*.war C:\\tomcat\\webapps\\ROOT.war
 RUN powershell -File "debug.ps1"
 EXPOSE 8080
-# WORKDIR c:\\tomcat\\bin
-# CMD ["startup.bat"]
-# CMD ["catalina.bat","stop",";","catalina.bat","start"]
-# CMD ["cmd", "/S", "/C", "echo Starting Tomcat && catalina.bat start && echo Stopping Tomcat && catalina.bat stop && echo Restarting Tomcat && catalina.bat start"]
-# CMD ["powershell", "-Command", "catalina.bat start; catalina.bat stop; catalina.bat start"]
-
-CMD ["cmd", "/S", "/C", "start-stop-start.bat"]
-
+CMD ["catalina.bat","run"]
 
