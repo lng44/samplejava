@@ -41,7 +41,7 @@ jobs:
       # Wait for a few seconds to ensure the container is up
       - name: Wait for container to be ready
         run: |
-          Start-Sleep -Seconds 30
+          Start-Sleep -Seconds 15
 
       - name: List Docker Container
         run: |
@@ -51,7 +51,17 @@ jobs:
       - name: Curl application content
         run: |
           curl http://localhost:8080/index.jsp
-          
+
+      # Wait for a few seconds to ensure the container is up
+      - name: Wait for container to be ready
+        run: |
+          Start-Sleep -Seconds 15
+
+      # Print content from the application using curl
+      - name: Curl application content
+        run: |
+          curl http://localhost:8080/index.jsp
+
       # Optionally, stop and remove the container after testing
       - name: Cleanup Docker container
         run: |
