@@ -1,7 +1,7 @@
 Invoke-WebRequest -Uri https://cdn.azul.com/zulu/bin/zulu8.82.0.21-ca-jdk8.0.432-win_x64.zip -OutFile C:\openjdk.zip;
 Expand-Archive -Path C:\openjdk.zip -DestinationPath C:\
 Remove-Item -Path C:\openjdk.zip
-Get-ChildItem -Path C:\ -Name *jdk-* | ForEach-Object {
+Get-ChildItem -Path C:\ -Name *jdk* | ForEach-Object {
     Rename-Item -Path C:\$_ -NewName C:\openjdk
 }
 

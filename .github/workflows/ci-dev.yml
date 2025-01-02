@@ -43,7 +43,7 @@ jobs:
         run: |
           Start-Sleep -Seconds 10
 
-      - name: List Docker Image
+      - name: List Docker Container
         run: |
           docker container ls
 
