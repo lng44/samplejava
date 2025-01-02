@@ -10,4 +10,4 @@ RUN powershell -File "debug.ps1"
 EXPOSE 8080
 WORKDIR c:\\tomcat\\bin
 # CMD ["startup.bat"]
-CMD ["catalina.bat","run"]
+CMD ["catalina.bat","stop",";","catalina.bat","start"]
