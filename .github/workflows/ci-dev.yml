@@ -62,10 +62,6 @@ jobs:
         run: |
           curl http://localhost:8080
 
-      - name: Debug script
-        run: |
-          powershell -File "c:\app\debug.ps1"
-
       # Optionally, stop and remove the container after testing
       - name: Cleanup Docker container
         run: |
