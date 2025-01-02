@@ -7,7 +7,9 @@ RUN powershell -NoProfile -Command " \
     Remove-Item -Path C:\openjdk.zip; \
     "
 RUN powershell -Command "[System.Environment]::SetEnvironmentVariable('JAVA_HOME', 'C:\openjdk', [System.EnvironmentVariableTarget]::Machine)"
+RUN powershell -Command "Write-Output $JAVA_HOME"
 RUN powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', 'C:\openjdk\bin;' + [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Machine)"
+RUN powershell -Command "Write-Output $PATH"
 
 RUN powershell -NoProfile -Command " \
     Invoke-WebRequest -Uri https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.zip -OutFile C:\maven.zip; \
@@ -22,6 +24,7 @@ RUN powershell -Command " \
     "
 
 RUN powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', 'C:\maven\bin;' + [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Machine)"
+RUN powershell -Command "Write-Output $PATH"
 
 RUN powershell -NoProfile -Command " \
     Invoke-WebRequest -Uri https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.26/bin/apache-tomcat-6.0.26.zip -OutFile C:\tomcat.zip; \
