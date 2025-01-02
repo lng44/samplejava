@@ -1,4 +1,5 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
+USER ROOT
 RUN tzutil /s "Central Standard Time"
 RUN MKDIR c:\\app
 WORKDIR c:/app
@@ -12,4 +13,5 @@ COPY ./target/*.war c:/tomcat/webapps/ROOT.war
 # RUN jar -xvf ..\\ROOT.war
 # WORKDIR c:/app
 # RUN powershell -File "debug.ps1"
+USER ROOT
 CMD ["catalina.bat","run"]
