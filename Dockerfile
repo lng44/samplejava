@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 RUN tzutil /s "Central Standard Time"
-WORKDIR c:/
-RUN MKDIR app
+RUN MKDIR c:\\app
 WORKDIR c:/app
 COPY . .
 RUN powershell -File "init.ps1"
