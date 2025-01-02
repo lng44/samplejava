@@ -10,7 +10,7 @@ RUN powershell -Command "[System.Environment]::SetEnvironmentVariable('JAVA_HOME
 RUN powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', 'C:\openjdk\bin;' + [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Machine)"
 
 RUN powershell -NoProfile -Command " \
-    Invoke-WebRequest -Uri https://downloads.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.zip -OutFile C:\maven.zip; \
+    Invoke-WebRequest -Uri https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.zip -OutFile C:\maven.zip; \
     Expand-Archive -Path C:\maven.zip -DestinationPath C:\; \
     Remove-Item -Path C:\maven.zip; \
     Rename-Item -Path C:\apache-maven-* C:\maven; \
