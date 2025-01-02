@@ -19,10 +19,10 @@ Get-ChildItem -Path C:\ -Name apache-maven-* | ForEach-Object {
 Invoke-WebRequest -Uri https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.26/bin/apache-tomcat-6.0.26.zip -OutFile C:\tomcat.zip
 Expand-Archive -Path C:\tomcat.zip -DestinationPath C:\
 Remove-Item -Path C:\tomcat.zip;
-Remove-Item -LiteralPath "C:\tomcat\webapps\ROOT" -Force -Recurse
 Get-ChildItem -Path C:\ -Name apache-tomcat-* | ForEach-Object {
     Rename-Item -Path C:\$_ -NewName C:\tomcat
 }
+Remove-Item -LiteralPath "C:\tomcat\webapps\ROOT" -Force -Recurse
 [System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\tomcat","Machine")
 
 Get-ChildItem -Path C:\openjdk
