@@ -41,7 +41,7 @@ jobs:
       # Wait for a few seconds to ensure the container is up
       - name: Wait for container to be ready
         run: |
-          Start-Sleep -Seconds 15
+          Start-Sleep -Seconds 20
 
       - name: List Docker Container
         run: |
@@ -50,17 +50,21 @@ jobs:
       # Print content from the application using curl
       - name: Curl application content
         run: |
-          curl http://localhost:8080/index.jsp
+          curl http://localhost:8080
 
       # Wait for a few seconds to ensure the container is up
       - name: Wait for container to be ready
         run: |
-          Start-Sleep -Seconds 15
+          Start-Sleep -Seconds 20
 
       # Print content from the application using curl
       - name: Curl application content
         run: |
-          curl http://localhost:8080/index.jsp
+          curl http://localhost:8080
+
+      - name: Debug script
+        run: |
+          powershell -File "c:\app\debug.ps1"
 
       # Optionally, stop and remove the container after testing
       - name: Cleanup Docker container
