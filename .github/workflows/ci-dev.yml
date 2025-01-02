@@ -50,7 +50,7 @@ jobs:
       # Print content from the application using curl
       - name: Curl application content
         run: |
-          curl http://localhost:8080
+          curl http://localhost:8080/index.jsp
           
       # Optionally, stop and remove the container after testing
       - name: Cleanup Docker container
