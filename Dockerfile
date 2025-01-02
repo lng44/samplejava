@@ -10,15 +10,15 @@ RUN powershell -Command "[System.Environment]::SetEnvironmentVariable('JAVA_HOME
 RUN powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', 'C:\openjdk\bin;' + [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Machine)"
 
 RUN powershell -NoProfile -Command " \
-    Invoke-WebRequest -Uri https://downloads.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.zip -OutFile C:\maven.zip; \
+    Invoke-WebRequest -Uri https://downloads.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.zip -OutFile C:\maven.zip; \
     Expand-Archive -Path C:\maven.zip -DestinationPath C:\; \
-    Rename-Item -Path C:\apache-maven-* C:\maven; \
     Remove-Item -Path C:\maven.zip; \
+    Rename-Item -Path C:\apache-maven-* C:\maven; \
     "
 RUN powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', 'C:\maven\bin;' + [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Machine)"
 
 RUN powershell -NoProfile -Command " \
-    Invoke-WebRequest -Uri https://downloads.apache.org/tomcat/tomcat-6/v6.0.53/bin/apache-tomcat-6.0.53.zip -OutFile C:\tomcat.zip; \
+    Invoke-WebRequest -Uri https://downloads.apache.org/tomcat/tomcat-6/v6.0.26/bin/apache-tomcat-6.0.26.zip -OutFile C:\tomcat.zip; \
     Expand-Archive -Path C:\tomcat.zip -DestinationPath C:\; \
     Rename-Item -Path C:\apache-tomcat-* C:\tomcat; \
     Remove-Item -Path C:\tomcat.zip; \
