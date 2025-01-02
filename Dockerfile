@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2016
+FROM mcr.microsoft.com/windows/servercore:1809
 
 RUN tzutil /s "Central Standard Time"
 RUN powershell -NoProfile -Command " \
