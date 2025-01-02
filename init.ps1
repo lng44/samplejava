@@ -6,7 +6,7 @@ Remove-Item -Path C:\openjdk.zip
 Write-Output ${env:JAVA_HOME}
 
 Write-Output ${env:PATH}
-[System.Environment]::SetEnvironmentVariable("PATH", "C:\openjdk\bin;" + ${env:PATH},[System.EnvironmentVariableTarget]::Machine)
+[System.Environment]::SetEnvironmentVariable("PATH", "C:\openjdk\bin;${env:PATH}",[System.EnvironmentVariableTarget]::Machine)
 Write-Output ${env:PATH}
 
 
@@ -18,7 +18,7 @@ Get-ChildItem -Path C:\ -Name apache-maven-* | ForEach-Object {
 }
 
 Write-Output ${env:PATH}
-[System.Environment]::SetEnvironmentVariable("PATH", "C:\maven\bin;" + ${env:PATH},[System.EnvironmentVariableTarget]::Machine)
+[System.Environment]::SetEnvironmentVariable("PATH", "C:\maven\bin;${env:PATH}",[System.EnvironmentVariableTarget]::Machine)
 Write-Output ${env:PATH}
 
 Invoke-WebRequest -Uri https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.26/bin/apache-tomcat-6.0.26.zip -OutFile C:\tomcat.zip
