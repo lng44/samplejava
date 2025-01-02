@@ -1,5 +1,6 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
+RUN MKDIR c:\app
 COPY . c:\app
 WORKDIR c:\app
 
