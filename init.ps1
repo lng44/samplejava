@@ -1,4 +1,4 @@
-Invoke-WebRequest -Uri https://download.java.net/openjdk/jdk17/ri/openjdk-17+35_windows-x64_bin.zip -OutFile C:\openjdk.zip;
+Invoke-WebRequest -Uri https://cdn.azul.com/zulu/bin/zulu8.82.0.21-ca-jdk8.0.432-win_x64.zip -OutFile C:\openjdk.zip;
 Expand-Archive -Path C:\openjdk.zip -DestinationPath C:\
 Remove-Item -Path C:\openjdk.zip
 Get-ChildItem -Path C:\ -Name *jdk-* | ForEach-Object {
