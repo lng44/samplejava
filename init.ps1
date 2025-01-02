@@ -16,6 +16,7 @@ Get-ChildItem -Path C:\ -Name apache-maven-* | ForEach-Object {
 }
 [System.Environment]::SetEnvironmentVariable("PATH", "C:\maven\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
 
+# https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.26/bin/apache-tomcat-6.0.26-windows-x64.zip
 Invoke-WebRequest -Uri https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.53/bin/apache-tomcat-6.0.53-windows-x64.zip -OutFile C:\tomcat.zip
 Expand-Archive -Path C:\tomcat.zip -DestinationPath C:\
 Remove-Item -Path C:\tomcat.zip;
@@ -23,7 +24,7 @@ Get-ChildItem -Path C:\ -Name apache-tomcat-* | ForEach-Object {
     Rename-Item -Path C:\$_ -NewName C:\tomcat
 }
 # Remove-Item -Recurse -Force C:\tomcat\webapps\ROOT
-[System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\tomcat","Machine")
+# [System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\tomcat","Machine")
 [System.Environment]::SetEnvironmentVariable("PATH", "C:\tomcat\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
 
 Get-ChildItem -Path C:\openjdk
