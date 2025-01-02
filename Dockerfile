@@ -18,7 +18,7 @@ RUN powershell -NoProfile -Command " \
 RUN powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', 'C:\maven\bin;' + [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Machine)"
 
 RUN powershell -NoProfile -Command " \
-    Invoke-WebRequest -Uri https://downloads.apache.org/tomcat/tomcat-6/v6.0.26/bin/apache-tomcat-6.0.26.zip -OutFile C:\tomcat.zip; \
+    Invoke-WebRequest -Uri https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.26/bin/apache-tomcat-6.0.26.zip -OutFile C:\tomcat.zip; \
     Expand-Archive -Path C:\tomcat.zip -DestinationPath C:\; \
     Rename-Item -Path C:\apache-tomcat-* C:\tomcat; \
     Remove-Item -Path C:\tomcat.zip; \
