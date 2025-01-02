@@ -13,8 +13,8 @@ Write-Output ${env:PATH}
 Invoke-WebRequest -Uri https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.zip -OutFile C:\maven.zip
 Expand-Archive -Path C:\maven.zip -DestinationPath C:\
 Remove-Item -Path C:\maven.zip
-Get-ChildItem -Path C:\ -Name apache-maven-* | ForEach-Object { \
-    Rename-Item -Path C:\$_ -NewName C:\maven \
+Get-ChildItem -Path C:\ -Name apache-maven-* | ForEach-Object {
+    Rename-Item -Path C:\$_ -NewName C:\maven
 }
 
 Write-Output ${env:PATH}
@@ -25,6 +25,6 @@ Invoke-WebRequest -Uri https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.26/b
 Expand-Archive -Path C:\tomcat.zip -DestinationPath C:\
 Remove-Item -Path C:\tomcat.zip;
 
-Get-ChildItem -Path C:\ -Name apache-tomcat-* | ForEach-Object { \
-    Rename-Item -Path C:\$_ -NewName C:\tomcat \
+Get-ChildItem -Path C:\ -Name apache-tomcat-* | ForEach-Object {
+    Rename-Item -Path C:\$_ -NewName C:\tomcat
 }
