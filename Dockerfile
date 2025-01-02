@@ -9,3 +9,4 @@ RUN copy c:\\app\\target\\*.war C:\\tomcat\\webapps\\ROOT.war
 EXPOSE 8080
 RUN tzutil /s "Central Standard Time"
 CMD ["cmd", "/c", "C:\tomcat\bin\startup.bat && tail -f C:\tomcat\logs\catalina.out"]
+# CMD ["powershell", "-Command", "Start-Process -NoNewWindow -FilePath 'C:\\tomcat\\bin\\startup.bat'; Wait-Process -Name 'java'"]
