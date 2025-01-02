@@ -8,6 +8,8 @@ RUN mvn clean package
 WORKDIR c:\\tomcat\\bin
 RUN startup.bat
 RUN copy c:\\app\\target\\*.war C:\\tomcat\\webapps\\ROOT.war
+RUN sleep 10
 RUN shutdown.bat
+RUN sleep 10
 EXPOSE 8080
 CMD ["catalina.bat","run"]
