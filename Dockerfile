@@ -13,8 +13,14 @@ RUN powershell -NoProfile -Command " \
     Invoke-WebRequest -Uri https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.zip -OutFile C:\maven.zip; \
     Expand-Archive -Path C:\maven.zip -DestinationPath C:\; \
     Remove-Item -Path C:\maven.zip; \
-    Rename-Item -Path C:\apache-maven-* C:\maven; \
     "
+
+RUN powershell -Command " \
+    Get-ChildItem -Path C:\ -Name apache-maven-* | ForEach-Object { \
+        Rename-Item -Path C:\$_ -NewName C:\maven \
+    }; \
+    "
+
 RUN powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', 'C:\maven\bin;' + [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Machine)"
 
 RUN powershell -NoProfile -Command " \
