@@ -41,7 +41,7 @@ jobs:
       # Wait for a few seconds to ensure the container is up
       - name: Wait for container to be ready
         run: |
-          Start-Sleep -Seconds 10
+          Start-Sleep -Seconds 100
 
       - name: List Docker Container
         run: |
