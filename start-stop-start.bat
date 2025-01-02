@@ -1,0 +1,9 @@
+@echo off
+echo Starting Tomcat...
+catalina.bat start
+timeout /t 10 /nobreak
+echo Stopping Tomcat...
+catalina.bat stop
+timeout /t 5 /nobreak
+echo Starting Tomcat again...
+catalina.bat start
