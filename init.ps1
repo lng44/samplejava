@@ -6,10 +6,7 @@ Get-ChildItem -Path C:\ -Name *jdk-* | ForEach-Object {
 }
 
 [System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\openjdk","Machine")
-Write-Output ${env:JAVA_HOME} 
-
 [System.Environment]::SetEnvironmentVariable("PATH", "C:\openjdk\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
-Write-Output ${env:PATH} 
 
 Invoke-WebRequest -Uri https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.zip -OutFile C:\maven.zip
 Expand-Archive -Path C:\maven.zip -DestinationPath C:\
@@ -19,7 +16,6 @@ Get-ChildItem -Path C:\ -Name apache-maven-* | ForEach-Object {
 }
 
 [System.Environment]::SetEnvironmentVariable("PATH", "C:\maven\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
-Write-Output ${env:PATH} 
 
 Invoke-WebRequest -Uri https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.26/bin/apache-tomcat-6.0.26.zip -OutFile C:\tomcat.zip
 Expand-Archive -Path C:\tomcat.zip -DestinationPath C:\
@@ -28,3 +24,7 @@ Remove-Item -Path C:\tomcat.zip;
 Get-ChildItem -Path C:\ -Name apache-tomcat-* | ForEach-Object {
     Rename-Item -Path C:\$_ -NewName C:\tomcat
 }
+
+Get-ChildItem -Path C:\openjdk
+Get-ChildItem -Path C:\maven
+Get-ChildItem -Path C:\tomcat
