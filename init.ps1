@@ -24,6 +24,7 @@ Get-ChildItem -Path C:\ -Name apache-tomcat-* | ForEach-Object {
 }
 Remove-Item -LiteralPath "C:\tomcat\webapps\ROOT" -Force -Recurse
 [System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\tomcat","Machine")
+[System.Environment]::SetEnvironmentVariable("PATH", "C:\tomcat\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
 
 Get-ChildItem -Path C:\openjdk
 Get-ChildItem -Path C:\maven
