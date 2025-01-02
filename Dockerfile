@@ -26,8 +26,12 @@ RUN powershell -Command "[System.Environment]::SetEnvironmentVariable('PATH', 'C
 RUN powershell -NoProfile -Command " \
     Invoke-WebRequest -Uri https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.26/bin/apache-tomcat-6.0.26.zip -OutFile C:\tomcat.zip; \
     Expand-Archive -Path C:\tomcat.zip -DestinationPath C:\; \
-    Rename-Item -Path C:\apache-tomcat-* C:\tomcat; \
     Remove-Item -Path C:\tomcat.zip; \
+    "
+RUN powershell -Command " \
+    Get-ChildItem -Path C:\ -Name apache-tomcat-* | ForEach-Object { \
+        Rename-Item -Path C:\$_ -NewName C:\tomcat \
+    }; \
     "
 
 COPY . /app
