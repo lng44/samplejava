@@ -1,15 +1,3 @@
-$currentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
-Write-Host "Current User: $currentUser"
-
-# Get groups for the current user
-$currentPrincipal = New-Object System.Security.Principal.WindowsPrincipal([System.Security.Principal.WindowsIdentity]::GetCurrent())
-$groups = $currentPrincipal.Groups | ForEach-Object { $_.Translate([System.Security.Principal.NTAccount]).Value }
-
-Write-Host "Groups:"
-$groups | ForEach-Object { Write-Host $_ }
-
-
-
 Invoke-WebRequest -Uri https://cdn.azul.com/zulu/bin/zulu8.82.0.21-ca-jdk8.0.432-win_x64.zip -OutFile C:\app\openjdk.zip;
 Expand-Archive -Path C:\app\openjdk.zip -DestinationPath C:\app\
 Remove-Item -Path C:\app\openjdk.zip
