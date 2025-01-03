@@ -11,7 +11,7 @@ WORKDIR c:/app
 COPY . .
 RUN powershell -File "init.ps1"
 RUN mvn clean package
-RUN copy c:\\app\\target\\*.war c:\\app\\tomcat\\webapps\\ROOT.war
+RUN copy c:\\app\\target\\*.war c:\\app\\tomcat\\webapps
 # RUN MKDIR c:\\tomcat\\webapps\\ROOT
 # WORKDIR c:/tomcat/webapps/ROOT
 # RUN jar -xvf ..\\ROOT.war
