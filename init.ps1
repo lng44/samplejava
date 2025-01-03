@@ -29,6 +29,7 @@ Get-ChildItem -Path C:\app\ -Name apache-tomcat-* | ForEach-Object {
 
 try {
     $aclPath = $path + 'C:\app\tomcat'
+    Get-Acl -Path $aclPath
     Write-Host "Changing permissions for: $aclPath"
 
     $objUser = New-Object System.Security.Principal.NTAccount(".", "ContainerUser")
@@ -49,8 +50,8 @@ catch {
 }
 
 
-Get-ChildItem -Path C:\app\
-Get-ChildItem -Path C:\app\openjdk
-Get-ChildItem -Path C:\app\maven
-Get-ChildItem -Path C:\app\tomcat
-Get-ChildItem -Path C:\app\tomcat\webapps
+# Get-ChildItem -Path C:\app\
+# Get-ChildItem -Path C:\app\openjdk
+# Get-ChildItem -Path C:\app\maven
+# Get-ChildItem -Path C:\app\tomcat
+# Get-ChildItem -Path C:\app\tomcat\webapps
