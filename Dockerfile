@@ -4,7 +4,7 @@ RUN powershell -Command "Get-ChildItem -Path C:\Users"
 RUN powershell -Command "Get-LocalUser"
 USER ContainerAdministrator
 RUN tzutil /s "Central Standard Time"
-# USER ContainerUser
+USER ContainerUser
 RUN MKDIR c:\\app
 WORKDIR c:/app
 COPY . .

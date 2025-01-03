@@ -5,8 +5,8 @@ Get-ChildItem -Path C:\app\ -Name *jdk* | ForEach-Object {
     Rename-Item -Path C:\app\$_ -NewName C:\app\openjdk
 }
 
-[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\app\openjdk","Machine")
-[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\openjdk\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
+[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\app\openjdk","User")
+[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\openjdk\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","User"),"User")
 
 Invoke-WebRequest -Uri https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.zip -OutFile C:\app\maven.zip
 Expand-Archive -Path C:\app\maven.zip -DestinationPath C:\app\
@@ -14,7 +14,7 @@ Remove-Item -Path C:\app\maven.zip
 Get-ChildItem -Path C:\app\ -Name apache-maven-* | ForEach-Object {
     Rename-Item -Path C:\app\$_ -NewName C:\app\maven
 }
-[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\maven\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
+[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\maven\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","User"),"User")
 
 # https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.26/bin/apache-tomcat-6.0.26-windows-x64.zip
 Invoke-WebRequest -Uri https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.53/bin/apache-tomcat-6.0.53-windows-x64.zip -OutFile C:\app\tomcat.zip
@@ -24,15 +24,15 @@ Get-ChildItem -Path C:\app\ -Name apache-tomcat-* | ForEach-Object {
     Rename-Item -Path C:\app\$_ -NewName C:\app\tomcat
 }
 # Remove-Item -Recurse -Force C:\app\tomcat\webapps\ROOT
-# [System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\app\tomcat","Machine")
-[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\tomcat\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
+# [System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\app\tomcat","User")
+[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\tomcat\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","User"),"User")
 
 
-$Folder = 'C:\app'
-$ACL = Get-Acl  $Folder
-$ACL_Rule = new-object System.Security.AccessControl.FileSystemAccessRule('ContainerUser', 'FullControl','ContainerInherit,ObjectInherit','None','Allow')
-$ACL.SetAccessRule($ACL_Rule)
-Set-Acl -Path $Folder -AclObject $ACL
+# $Folder = 'C:\app'
+# $ACL = Get-Acl  $Folder
+# $ACL_Rule = new-object System.Security.AccessControl.FileSystemAccessRule('ContainerUser', 'FullControl','ContainerInherit,ObjectInherit','None','Allow')
+# $ACL.SetAccessRule($ACL_Rule)
+# Set-Acl -Path $Folder -AclObject $ACL
 
 Get-ChildItem -Path C:\app\
 Get-ChildItem -Path C:\app\openjdk
