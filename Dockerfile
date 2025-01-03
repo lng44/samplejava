@@ -2,6 +2,8 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2019
 RUN powershell -Command "Get-ChildItem -Path ."
 RUN powershell -Command "Get-ChildItem -Path C:\Users"
 RUN powershell -Command "Get-LocalUser"
+RUN powershell -Command "Get-LocalGroup | ft Name, SID"
+
 
 USER ContainerAdministrator
 RUN tzutil /s "Central Standard Time"
