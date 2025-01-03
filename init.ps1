@@ -19,6 +19,7 @@
 # }
 [System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Users\ContainerUser\app\openjdk","User")
 [System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\Users\ContainerUser\app\tomcat","User")
+[System.Environment]::SetEnvironmentVariable("CATALINA_BASE", "C:\Users\ContainerUser\app\tomcat","User")
 
 [System.Environment]::SetEnvironmentVariable("PATH", "C:\Users\ContainerUser\app\openjdk\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","User"),"User")
 [System.Environment]::SetEnvironmentVariable("PATH", "C:\Users\ContainerUser\app\maven\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","User"),"User")
