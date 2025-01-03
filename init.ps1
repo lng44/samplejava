@@ -44,7 +44,7 @@ try {
     Get-Acl -Path $aclPath
     Write-Host "Changing permissions for: $aclPath"
 
-    $objUser = New-Object System.Security.Principal.NTAccount(".", "ContainerUser")
+    $objUser = New-Object System.Security.Principal.NTAccount(".", "User Manager")
     $strSID = $objUser.Translate([System.Security.Principal.SecurityIdentifier])
 
     Write-Host "SID value is: " $strSID
