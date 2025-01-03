@@ -62,6 +62,16 @@ jobs:
         run: |
           curl http://localhost:8080/java-hello-world
 
+      # Wait for a few seconds to ensure the container is up
+      - name: Wait for container to be ready
+        run: |
+          Start-Sleep -Seconds 5
+
+      # Print content from the application using curl
+      - name: Curl application content
+        run: |
+          curl http://localhost:8080
+
       # Optionally, stop and remove the container after testing
       - name: Cleanup Docker container
         run: |
