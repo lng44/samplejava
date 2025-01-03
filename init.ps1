@@ -39,7 +39,7 @@ try {
     $permissions = 'FullControl'
     $inheritance = 'ContainerInherit, ObjectInherit'
     $acl = Get-Acl -Path $aclPath
-    $rule = new-object System.Security.AccessControl.FileSystemAccessRule ( $strSID, 'FullControl', 'ContainerInherit,ObjectInherit', 'None', 'Allow') 
+    $rule = new-object System.Security.AccessControl.FileSystemAccessRule ( $strSID, $permissions, $inheritance, 'None', 'Allow') 
     $acl.AddAccessRule($rule)
     Set-Acl -AclObject $acl -Path $aclPath
     Write-Host "Access control change successful" -fore green
