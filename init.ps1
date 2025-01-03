@@ -31,7 +31,7 @@ try {
     $aclPath = $path + 'C:\app\tomcat'
     Get-Acl -Path $aclPath
     Write-Host "Changing permissions for: $aclPath"
-    $objUser = New-Object System.Security.Principal.NTAccount(".", "User Manager\ContainerUser")
+    $objUser = New-Object System.Security.Principal.NTAccount(".", "Users")
     $strSID = $objUser.Translate([System.Security.Principal.SecurityIdentifier])
     Write-Host "SID value is: " $strSID
     # $strSID = "User Manager\ContainerUser"
