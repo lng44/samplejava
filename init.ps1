@@ -27,8 +27,14 @@ Get-ChildItem -Path C:\app\ -Name apache-tomcat-* | ForEach-Object {
 # [System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\app\tomcat","Machine")
 [System.Environment]::SetEnvironmentVariable("PATH", "C:\app\tomcat\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
 
+
+$Folder = 'C:\app'
+$ACL = Get-Acl  $Folder
+$ACL_Rule = new-object System.Security.AccessControl.FileSystemAccessRule("ContainerUser", "FullControl",”ContainerInherit,ObjectInherit”,"None",”Allow”)
+$ACL.SetAccessRule($ACL_Rule)
+Set-Acl -Path $Folder -AclObject $ACL
+
 Get-ChildItem -Path C:\app\
-Get-ChildItem -Path C:\app\Users
 Get-ChildItem -Path C:\app\openjdk
 Get-ChildItem -Path C:\app\maven
 Get-ChildItem -Path C:\app\tomcat
