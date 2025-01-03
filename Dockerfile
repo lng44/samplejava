@@ -9,6 +9,7 @@ RUN tzutil /s "Central Standard Time"
 RUN MKDIR c:\\app
 WORKDIR c:/app
 COPY . .
+USER ContainerUser
 RUN powershell -File "init.ps1"
 # USER ContainerAdministrator
 RUN mvn clean package
