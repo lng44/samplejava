@@ -31,12 +31,10 @@ try {
     $aclPath = $path + 'C:\app\tomcat'
     Get-Acl -Path $aclPath
     Write-Host "Changing permissions for: $aclPath"
-
-    $objUser = New-Object System.Security.Principal.NTAccount(".", "User Manager")
-    $strSID = $objUser.Translate([System.Security.Principal.SecurityIdentifier])
-
-    Write-Host "SID value is: " $strSID
-
+    # $objUser = New-Object System.Security.Principal.NTAccount(".", "User Manager")
+    # $strSID = $objUser.Translate([System.Security.Principal.SecurityIdentifier])
+    # Write-Host "SID value is: " $strSID
+    $strSID = "ContainerUser"
     $permissions = 'FullControl'
     $inheritance = 'ContainerInherit, ObjectInherit'
     $acl = Get-Acl -Path $aclPath
