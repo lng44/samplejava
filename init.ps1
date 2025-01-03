@@ -28,7 +28,7 @@ Get-ChildItem -Path C:\app\ -Name apache-tomcat-* | ForEach-Object {
 [System.Environment]::SetEnvironmentVariable("PATH", "C:\app\tomcat\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
 
 try {
-    $aclPath = $path + 'C:\app'
+    $aclPath = $path + 'C:\app\tomcat'
     Write-Host "Changing permissions for: $aclPath"
 
     $objUser = New-Object System.Security.Principal.NTAccount("DOMAIN", "GROUP")
