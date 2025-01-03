@@ -27,14 +27,27 @@ Get-ChildItem -Path C:\app\ -Name apache-tomcat-* | ForEach-Object {
 # [System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\app\tomcat","Machine")
 [System.Environment]::SetEnvironmentVariable("PATH", "C:\app\tomcat\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
 
-Get-ACL -Path 'C:\app'
-Get-ACL -Path 'C:\Users\ContainerUser'
+try {
+    $aclPath = $path + 'C:\app'
+    Write-Host "Changing permissions for: $aclPath"
 
-$Folder = 'C:\app'
-$ACL = Get-Acl $Folder
-$ACL_Rule = new-object System.Security.AccessControl.FileSystemAccessRule('Users', 'FullControl','ContainerInherit,ObjectInherit','None','Allow')
-$ACL.SetAccessRule($ACL_Rule)
-Set-Acl -Path $Folder -AclObject $ACL
+    $objUser = New-Object System.Security.Principal.NTAccount("DOMAIN", "GROUP")
+    $strSID = $objUser.Translate([System.Security.Principal.SecurityIdentifier])
+
+    Write-Host "SID value is: " $strSID
+
+    $permissions = 'FullControl'
+    $inheritance = 'ContainerInherit, ObjectInherit'
+    $acl = Get-Acl -Path $aclPath
+    $rule = new-object System.Security.AccessControl.FileSystemAccessRule ( $strSID, 'FullControl', 'ContainerInherit,ObjectInherit', 'None', 'Allow') 
+    $acl.AddAccessRule($rule)
+    Set-Acl -AclObject $acl -Path $aclPath
+    Write-Host "Access control change successful" -fore green
+}
+catch {
+    Write-Host "Error setting access control: $_" -fore red
+}
+
 
 Get-ChildItem -Path C:\app\
 Get-ChildItem -Path C:\app\openjdk
