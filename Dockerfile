@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows:ltsc2019
 RUN powershell -Command "Get-ChildItem -Path ."
 RUN powershell -Command "Get-ChildItem -Path C:\Users"
 RUN powershell -Command "Get-LocalUser"
