@@ -19,7 +19,7 @@ Remove-Item -Path C:\Users\ContainerUser\app\tomcat.zip;
 Get-ChildItem -Path C:\Users\ContainerUser\app\ -Name apache-tomcat-* | ForEach-Object {
     Rename-Item -Path C:\Users\ContainerUser\app\$_ -NewName C:\Users\ContainerUser\app\tomcat
 }
-
+Remove-Item -Recurse -Force C:\Users\ContainerUser\app\tomcat\webapps\ROOT
 # Get-LocalGroup | ForEach-Object {
 #     $groupName = $_.Name
 #     Write-Output "Group: $groupName"
