@@ -72,6 +72,12 @@ jobs:
         run: |
           curl http://localhost:8080
 
+      # Print Log
+      - name: Print continer log
+        run: |
+          docker exec my-container cat C:/Users/ContainerUser/app/tomcat/logs/catalina.out
+
+
       # Optionally, stop and remove the container after testing
       - name: Cleanup Docker container
         run: |
