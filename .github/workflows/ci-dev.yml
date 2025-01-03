@@ -47,6 +47,19 @@ jobs:
         run: |
           docker ps -a
 
+      # Print Log
+      - name: Print continer log
+        run: |
+          docker logs my-container
+      # Print Log
+      - name: Print continer log
+        run: |
+          docker exec my-container dir C:\Users\ContainerUser\app\tomcat\webapps
+      # Print Log
+      - name: Print continer log
+        run: |
+          docker exec my-container dir C:\Users\ContainerUser\app\tomcat\webapps\ROOT\
+
       # Print content from the application using curl
       - name: Curl application content
         run: |
