@@ -30,7 +30,7 @@ Get-ChildItem -Path C:\app\ -Name apache-tomcat-* | ForEach-Object {
 
 $Folder = 'C:\app'
 $ACL = Get-Acl  $Folder
-$ACL_Rule = new-object System.Security.AccessControl.FileSystemAccessRule('ContainerUser', 'FullControl','ContainerInherit,ObjectInherit','None','Allow')
+$ACL_Rule = new-object System.Security.AccessControl.FileSystemAccessRule('Users', 'FullControl','ContainerInherit,ObjectInherit','None','Allow')
 $ACL.SetAccessRule($ACL_Rule)
 Set-Acl -Path $Folder -AclObject $ACL
 
