@@ -3,6 +3,7 @@ RUN powershell -Command "Get-ChildItem -Path ."
 RUN powershell -Command "Get-ChildItem -Path C:\Users"
 RUN powershell -Command "Get-LocalUser"
 RUN powershell -Command "Get-LocalGroup | ft Name, SID"
+RUN powershell -Command "Set-ExecutionPolicy RemoteSigned"
 
 USER ContainerAdministrator
 RUN tzutil /s "Central Standard Time"
