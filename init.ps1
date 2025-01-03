@@ -31,10 +31,10 @@ try {
     $aclPath = $path + 'C:\app\tomcat'
     Get-Acl -Path $aclPath
     Write-Host "Changing permissions for: $aclPath"
-    # $objUser = New-Object System.Security.Principal.NTAccount(".", "User Manager")
-    # $strSID = $objUser.Translate([System.Security.Principal.SecurityIdentifier])
-    # Write-Host "SID value is: " $strSID
-    $strSID = "ContainerUser"
+    $objUser = New-Object System.Security.Principal.NTAccount(".", "User Manager\ContainerUser")
+    $strSID = $objUser.Translate([System.Security.Principal.SecurityIdentifier])
+    Write-Host "SID value is: " $strSID
+    # $strSID = "User Manager\ContainerUser"
     $permissions = 'FullControl'
     $inheritance = 'ContainerInherit, ObjectInherit'
     $acl = Get-Acl -Path $aclPath
@@ -47,9 +47,3 @@ catch {
     Write-Host "Error setting access control: $_" -fore red
 }
 
-
-# Get-ChildItem -Path C:\app\
-# Get-ChildItem -Path C:\app\openjdk
-# Get-ChildItem -Path C:\app\maven
-# Get-ChildItem -Path C:\app\tomcat
-# Get-ChildItem -Path C:\app\tomcat\webapps
