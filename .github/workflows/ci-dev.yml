@@ -75,8 +75,7 @@ jobs:
       # Print Log
       - name: Print continer log
         run: |
-          docker exec my-container cat C:/Users/ContainerUser/app/tomcat/logs/catalina.out
-
+          docker logs my-container
 
       # Optionally, stop and remove the container after testing
       - name: Cleanup Docker container
