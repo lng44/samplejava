@@ -23,7 +23,8 @@ Remove-Item -Path C:\app\tomcat.zip;
 Get-ChildItem -Path C:\app\ -Name apache-tomcat-* | ForEach-Object {
     Rename-Item -Path C:\app\$_ -NewName C:\app\tomcat
 }
-# Remove-Item -Recurse -Force C:\app\tomcat\webapps\ROOT
+
+Remove-Item -Recurse -Force C:\app\tomcat\webapps\ROOT
 [System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\app\tomcat","Machine")
 [System.Environment]::SetEnvironmentVariable("PATH", "C:\app\tomcat\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
 
