@@ -17,10 +17,16 @@
 # catch {
 #     Write-Host "Error setting access control: $_" -fore red
 # }
-[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\app\openjdk","Machine")
-[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\openjdk\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
-[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\maven\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
-[System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\app\tomcat","Machine")
-[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\tomcat\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
+[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\app\openjdk","User")
+[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\openjdk\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","User"),"User")
+[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\maven\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","User"),"User")
+[System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\app\tomcat","User")
+[System.Environment]::SetEnvironmentVariable("PATH", "C:\app\tomcat\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","User"),"User")
+
+# Get-ChildItem -Path C:\app\openjdk
+# Get-ChildItem -Path C:\app\maven
+# Get-ChildItem -Path C:\app\tomcat
+# Get-ChildItem -Path C:\app\tomcat\webapps
+# Get-ChildItem -Path C:\app\tomcat\webapps\ROOT
 
 
