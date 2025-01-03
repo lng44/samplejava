@@ -51,14 +51,6 @@ jobs:
       - name: Print continer log
         run: |
           docker logs my-container
-      # Print Log
-      - name: Print continer log
-        run: |
-          docker exec my-container dir C:\Users\ContainerUser\app\tomcat\webapps
-      # Print Log
-      - name: Print continer log
-        run: |
-          docker exec my-container dir C:\Users\ContainerUser\app\tomcat\webapps\ROOT\
 
       # Print content from the application using curl
       - name: Curl application content
@@ -89,6 +81,14 @@ jobs:
       - name: Print continer log
         run: |
           docker logs my-container
+      # Print Log
+      - name: Print continer log
+        run: |
+          docker exec my-container dir C:\\Users\ContainerUser\\app\\tomcat\\webapps
+      # Print Log
+      - name: Print continer log
+        run: |
+          docker exec my-container dir C:\\Users\\ContainerUser\\app\\tomcat\\webapps\\ROOT\\
 
       # Optionally, stop and remove the container after testing
       - name: Cleanup Docker container
