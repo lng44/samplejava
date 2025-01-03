@@ -13,7 +13,7 @@ COPY . .
 RUN powershell -File "debug.ps1"
 RUN powershell -File "init.ps1"
 RUN mvn clean package
-RUN copy c:\\Users\\ContainerUser\\app\\target\\*.war c:\\Users\\ContainerUser\\app\\tomcat\\webapps\\ROOT.war
+RUN copy c:\\Users\\ContainerUser\\app\\target\\*.war c:\\Users\\ContainerUser\\app\\tomcat\\webapps
 # RUN MKDIR c:\\tomcat\\webapps\\ROOT
 # WORKDIR c:/tomcat/webapps/ROOT
 # RUN jar -xvf ..\\ROOT.war
