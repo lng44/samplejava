@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2019
+RUN powershell -Command "Get-ChildItem -Path ."
 RUN powershell -Command "Get-LocalUser"
 USER ContainerUser
 RUN tzutil /s "Central Standard Time"

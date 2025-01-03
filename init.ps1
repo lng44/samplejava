@@ -27,6 +27,8 @@ Get-ChildItem -Path C:\ -Name apache-tomcat-* | ForEach-Object {
 # [System.Environment]::SetEnvironmentVariable("CATALINA_HOME", "C:\tomcat","Machine")
 [System.Environment]::SetEnvironmentVariable("PATH", "C:\tomcat\bin;"+[System.Environment]::GetEnvironmentVariable("PATH","Machine"),"Machine")
 
+Get-ChildItem -Path C:\
+Get-ChildItem -Path C:\Users
 Get-ChildItem -Path C:\openjdk
 Get-ChildItem -Path C:\maven
 Get-ChildItem -Path C:\tomcat
