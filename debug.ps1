@@ -1,4 +1,13 @@
 
+Get-LocalGroup | ForEach-Object {
+    $groupName = $_.Name
+    Write-Output "Group: $groupName"
+    Get-LocalGroupMember -Group $groupName | ForEach-Object {
+        Write-Output "    Member: $_"
+    }
+    Write-Output ""
+}
+
 $UserGroups = [System.Security.Principal.WindowsIdentity]::GetCurrent().Groups |
     ForEach-Object {
         $_.Translate([System.Security.Principal.NTAccount]).Value
