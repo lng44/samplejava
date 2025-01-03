@@ -11,7 +11,7 @@ COPY . .
 RUN powershell -File "init.ps1"
 RUN mvn clean package
 EXPOSE 8080
-COPY ./target/*.war c:/tomcat/webapps/ROOT.war
+COPY ./target/*.war c:/app/tomcat/webapps/ROOT.war
 # RUN MKDIR c:\\tomcat\\webapps\\ROOT
 # WORKDIR c:/tomcat/webapps/ROOT
 # RUN jar -xvf ..\\ROOT.war
