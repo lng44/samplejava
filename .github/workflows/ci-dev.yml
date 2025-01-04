@@ -37,16 +37,8 @@ jobs:
           JFROG_REGISTRY: "https://lng44.jfrog.io"
           GITHUB_TAG: ${{ github.ref_name }}
         run: |
-          # Ensure the tag is valid
-          if [ -z "$GITHUB_TAG" ]; then
-            echo "No tag detected, using 'latest'."
-            TAG="latest"
-          else
-            TAG="$GITHUB_TAG"
-          fi
-      
-          echo "Building Docker image with tag: $TAG"
-          docker build -t $JFROG_REGISTRY/docker-trial/my-image:$TAG .
+          echo "Building Docker image with tag: $GITHUB_TAG"
+          docker build -t $JFROG_REGISTRY/docker-trial/my-image:$GITHUB_TAG .
 
       - name: List Docker Image
         run: |
