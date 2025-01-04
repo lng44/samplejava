@@ -6,7 +6,6 @@ name: CI
 on:
   # Triggers the workflow on push to the "main" branch and when new tags are created
   push:
-    branches: [ "main" ]
     tags: [ "*" ] # Triggers on any new tag
 
 
@@ -28,17 +27,16 @@ jobs:
         env:
           JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }} # Add username to GitHub secrets
           JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }} # Add password to GitHub secrets
-          JFROG_REGISTRY: "https://lng44.jfrog.io"
+          JFROG_REGISTRY: ${{ vars.JFROG_REGISTRY }}
         run: |
           echo "$JFROG_PASSWORD" | docker login -u "$JFROG_USERNAME" -p "$JFROG_PASSWORD"
 
       - name: Build Docker Image
         env:
-          JFROG_REGISTRY: "https://lng44.jfrog.io"
+          JFROG_REGISTRY: ${{ vars.JFROG_REGISTRY }}
           GITHUB_TAG: ${{ github.ref_name }}
         run: |
-          echo "Building Docker image with tag: $GITHUB_TAG"
-          docker build -t $JFROG_REGISTRY/docker-trial/my-image:$GITHUB_TAG .
+          docker build -t "$JFROG_REGISTRY"/docker-trial/my-image:"$GITHUB_TAG" .
 
       - name: List Docker Image
         run: |
