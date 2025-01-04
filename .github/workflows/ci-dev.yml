@@ -24,12 +24,8 @@ jobs:
       - uses: actions/checkout@v4
       # Log in to JFrog container registry
       - name: Docker Login to JFrog
-        env:
-          JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }} # Add username to GitHub secrets
-          JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }} # Add password to GitHub secrets
-          JFROG_REGISTRY: ${{ vars.JFROG_REGISTRY }}
         run: |
-          echo "$JFROG_PASSWORD" | docker login -u "$JFROG_USERNAME" -p "$JFROG_PASSWORD"
+          docker login ${{ vars.JFROG_REGISTRY }} -u ${{ secrets.JFROG_USERNAME }} -p ${{ secrets.JFROG_PASSWORD }}
 
       - name: Build Docker Image
         run: |
