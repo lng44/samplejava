@@ -30,7 +30,7 @@ jobs:
           JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }} # Add password to GitHub secrets
           JFROG_REGISTRY: "https://lng44.jfrog.io" # Replace with your JFrog registry URL
         run: |
-          echo "$JFROG_PASSWORD" | docker login $JFROG_REGISTRY -u "$JFROG_USERNAME" --password-stdin
+          echo "$JFROG_PASSWORD" | docker login -u "$JFROG_USERNAME" -p $JFROG_PASSWORD
 
       - name: Build Docker Image
         env:
