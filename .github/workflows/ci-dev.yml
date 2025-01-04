@@ -32,23 +32,13 @@ jobs:
           echo "$JFROG_PASSWORD" | docker login -u "$JFROG_USERNAME" -p "$JFROG_PASSWORD"
 
       - name: Build Docker Image
-        env:
-          JFROG_REGISTRY: ${{ vars.JFROG_REGISTRY }}
-          GITHUB_TAG: ${{ github.ref_name }}
         run: |
-          docker build -t "$JFROG_REGISTRY"/docker-trial/my-image:"$GITHUB_TAG" .
-
-      - name: List Docker Image
-        run: |
-          docker image ls
+          docker build -t my-image:${{ github.ref_name }} .
 
       # Push Docker image to JFrog container registry
       - name: Push Docker Image to JFrog
-        env:
-          GITHUB_TAG: ${{ github.ref_name }}
-          JFROG_REGISTRY: "your-jfrog-registry-url" # Replace with your JFrog registry URL
         run: |
-          docker push $JFROG_REGISTRY/my-repo/my-image:$GITHUB_TAG
+          docker push ${{ vars.JFROG_REGISTRY }}/my-repo/my-image:${{ github.ref_name }}
 
       # # Start Docker container
       # - name: Start Docker container
