@@ -28,25 +28,25 @@ jobs:
         env:
           JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }} # Add username to GitHub secrets
           JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }} # Add password to GitHub secrets
-          JFROG_REGISTRY: "https://lng44.jfrog.io" # Replace with your JFrog registry URL
+          JFROG_REGISTRY: "https://lng44.jfrog.io"
         run: |
           echo "$JFROG_PASSWORD" | docker login -u "$JFROG_USERNAME" -p "$JFROG_PASSWORD"
 
-          - name: Build Docker Image
-          env:
-            JFROG_REGISTRY: "your-jfrog-registry-url" # Replace with your JFrog registry URL
-            GITHUB_TAG: ${{ github.ref_name }}
-          run: |
-            # Ensure the tag is valid
-            if [ -z "$GITHUB_TAG" ]; then
-              echo "No tag detected, using 'latest'."
-              TAG="latest"
-            else
-              TAG="$GITHUB_TAG"
-            fi
-        
-            echo "Building Docker image with tag: $TAG"
-            docker build -t $JFROG_REGISTRY/docker-trial/my-image:$TAG .
+      - name: Build Docker Image
+        env:
+          JFROG_REGISTRY: "https://lng44.jfrog.io"
+          GITHUB_TAG: ${{ github.ref_name }}
+        run: |
+          # Ensure the tag is valid
+          if [ -z "$GITHUB_TAG" ]; then
+            echo "No tag detected, using 'latest'."
+            TAG="latest"
+          else
+            TAG="$GITHUB_TAG"
+          fi
+      
+          echo "Building Docker image with tag: $TAG"
+          docker build -t $JFROG_REGISTRY/docker-trial/my-image:$TAG .
 
       - name: List Docker Image
         run: |
