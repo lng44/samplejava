@@ -4,11 +4,11 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # Triggers the workflow on push to the "main" branch and when new tags are created
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags: [ "*" ] # Triggers on any new tag
+
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -23,75 +23,64 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v4
-
-      # Build Docker image
-      - name: Build Docker image
+      # Log in to JFrog container registry
+      - name: Docker Login to JFrog
+        env:
+          JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }} # Add username to GitHub secrets
+          JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }} # Add password to GitHub secrets
+          JFROG_REGISTRY: "https://lng44.jfrog.io" # Replace with your JFrog registry URL
         run: |
-          docker build -t my-image .
+          echo "$JFROG_PASSWORD" | docker login $JFROG_REGISTRY -u "$JFROG_USERNAME" --password-stdin
+
+      - name: Build Docker Image
+        env:
+          GITHUB_TAG: ${{ github.ref_name }}
+        run: |
+          docker build -t $JFROG_REGISTRY/docker-trial/my-image:$GITHUB_TAG .
 
       - name: List Docker Image
         run: |
           docker image ls
 
-      # Start Docker container
-      - name: Start Docker container
+      # Push Docker image to JFrog container registry
+      - name: Push Docker Image to JFrog
+        env:
+          GITHUB_TAG: ${{ github.ref_name }}
+          JFROG_REGISTRY: "your-jfrog-registry-url" # Replace with your JFrog registry URL
         run: |
-          docker run -d -p 8080:8080 --name my-container my-image
+          docker push $JFROG_REGISTRY/my-repo/my-image:$GITHUB_TAG
 
-      # Wait for a few seconds to ensure the container is up
-      - name: Wait for container to be ready
-        run: |
-          Start-Sleep -Seconds 8
+      # # Start Docker container
+      # - name: Start Docker container
+      #   run: |
+      #     docker run -d -p 8080:8080 --name my-container my-image
+
+      # # Wait for a few seconds to ensure the container is up
+      # - name: Wait for container to be ready
+      #   run: |
+      #     Start-Sleep -Seconds 8
 
       - name: List Docker Container
         run: |
           docker ps -a
 
-      # Print Log
-      - name: Print continer log
-        run: |
-          docker logs my-container
+      # # Print Log
+      # - name: Print continer log
+      #   run: |
+      #     docker logs my-container
 
-      # Print content from the application using curl
-      - name: Curl application content
-        run: |
-          curl http://localhost:8080
+      # # Print content from the application using curl
+      # - name: Curl application content
+      #   run: |
+      #     curl http://localhost:8080
 
-      # Wait for a few seconds to ensure the container is up
-      - name: Wait for container to be ready
-        run: |
-          Start-Sleep -Seconds 5
+      # # Print Log
+      # - name: Print continer log
+      #   run: |
+      #     docker logs my-container
 
-      # Print content from the application using curl
-      - name: Curl application content
-        run: |
-          curl http://localhost:8080/java-hello-world
-
-      # Wait for a few seconds to ensure the container is up
-      - name: Wait for container to be ready
-        run: |
-          Start-Sleep -Seconds 5
-
-      # Print content from the application using curl
-      - name: Curl application content
-        run: |
-          curl http://localhost:8080
-
-      # Print Log
-      - name: Print continer log
-        run: |
-          docker logs my-container
-      # Print Log
-      - name: Print continer log
-        run: |
-          docker exec my-container dir C:\\Users\ContainerUser\\app\\tomcat\\webapps
-      # Print Log
-      - name: Print continer log
-        run: |
-          docker exec my-container dir C:\\Users\\ContainerUser\\app\\tomcat\\webapps\\ROOT\\
-
-      # Optionally, stop and remove the container after testing
-      - name: Cleanup Docker container
-        run: |
-          docker stop my-container
-          docker rm my-container
+      # # Optionally, stop and remove the container after testing
+      # - name: Cleanup Docker container
+      #   run: |
+      #     docker stop my-container
+      #     docker rm my-container
