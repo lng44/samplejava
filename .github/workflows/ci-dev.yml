@@ -24,26 +24,29 @@ jobs:
       - uses: actions/checkout@v4
       # Log in to JFrog container registry
       - name: Docker Login to JFrog
+        shell: cmd
         env:
           JFROG_REGISTRY: ${{ vars.JFROG_REGISTRY }}
           JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
           JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
         run: |
-          docker login "$JFROG_REGISTRY" -u "$JFROG_USERNAME" -p "$JFROG_PASSWORD"
+          docker login "%JFROG_REGISTRY%" -u "%JFROG_USERNAME%" -p "%JFROG_PASSWORD%"
 
       - name: Build Docker Image
+        shell: cmd
         env:
           GIT_TAG: ${{ github.ref_name }}
         run: |
-          docker build -t my-image:"$GIT_TAG" .
+          docker build -t my-image:"%GIT_TAG%" .
 
       # Push Docker image to JFrog container registry
       - name: Push Docker Image to JFrog
+        shell: cmd
         env:
           JFROG_REGISTRY: ${{ vars.JFROG_REGISTRY }}
           GIT_TAG: ${{ github.ref_name }}
         run: |
-          docker push "$JFROG_REGISTRY"/docker-trial/my-image:"$GIT_TAG"
+          docker push "%JFROG_REGISTRY%"/docker-trial/my-image:"%GIT_TAG%"
 
       # # Start Docker container
       # - name: Start Docker container
