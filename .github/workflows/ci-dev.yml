@@ -38,7 +38,7 @@ jobs:
       # Push Docker image to JFrog container registry
       - name: Push Docker Image to JFrog
         run: |
-          docker push ${{ vars.JFROG_REGISTRY }}/my-repo/my-image:${{ github.ref_name }}
+          docker push ${{ vars.JFROG_REGISTRY }}/docker-trial/my-image:${{ github.ref_name }}
 
       # # Start Docker container
       # - name: Start Docker container
