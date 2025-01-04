@@ -39,14 +39,13 @@ jobs:
         run: |
           docker build -t my-image:"%GIT_TAG%" .
 
-
-      - name: Tag Docker Image
-        shell: cmd
-        env:
-          JFROG_REGISTRY: ${{ vars.JFROG_REGISTRY }}
-          GIT_TAG: ${{ github.ref_name }}
-        run: |
-          docker tag my-image:"%GIT_TAG%" "%JFROG_REGISTRY%"/docker-trial/my-image:"%GIT_TAG%"
+      # - name: Tag Docker Image
+      #   shell: cmd
+      #   env:
+      #     JFROG_REGISTRY: ${{ vars.JFROG_REGISTRY }}
+      #     GIT_TAG: ${{ github.ref_name }}
+      #   run: |
+      #     docker tag my-image:"%GIT_TAG%" "%JFROG_REGISTRY%"/docker-trial/my-image:"%GIT_TAG%"
   
       # Push Docker image to JFrog container registry
       - name: Push Docker Image to JFrog
